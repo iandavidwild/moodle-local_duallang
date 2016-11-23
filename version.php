@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package     local_stringman
- * @copyright   2015 David Mudrak <david@moodle.com>
+ * @package     local_duallang
+ * @copyright   2016 Ian Wild - based on local_stringman by David Mudrak <david@moodle.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_stringman';
+$plugin->component = 'local_duallang';
 $plugin->release = 'alpha1';
-$plugin->version = 2015031200;
+$plugin->version = 2016112300;
 $plugin->requires = 2015030900;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->dependencies = array();
