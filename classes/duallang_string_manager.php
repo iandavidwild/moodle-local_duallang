@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
 class duallang_string_manager extends \core_string_manager_standard {
 
     /**
-     * Dummy implementation of the get_string() method
+     * Implementation of the get_string() method to display both simplified Chinese and UK English simultaneously.
      *
      * @param string $identifier the identifier of the string to search for
      * @param string $component the component the string is provided by
@@ -43,23 +43,15 @@ class duallang_string_manager extends \core_string_manager_standard {
      * @return string
      */
     public function get_string($identifier, $component = '', $a = null, $lang = null) {
-
-        if ($component == '') {
-            $component = 'core';
+        
+        $string = parent::get_string($identifier, $component, $a, 'en');
+        
+        $zh_cn = parent::get_string($identifier, $component, $a, 'zh_cn');
+         
+        if(strlen($zh_cn) > 0) {
+            $string .= ' | ' . $zh_cn;
         }
-
-        $string = '{'.$identifier.'//'.$component;
-
-        if ($a !== null) {
-            $string .= '//'.gettype($a);
-        }
-
-        if ($lang !== null) {
-            $string .= '//'.$lang;
-        }
-
-        $string .= '}';
-
+        
         return $string;
     }
 }
