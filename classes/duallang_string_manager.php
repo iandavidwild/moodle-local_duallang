@@ -43,15 +43,25 @@ class duallang_string_manager extends \core_string_manager_standard {
      * @return string
      */
     public function get_string($identifier, $component = '', $a = null, $lang = null) {
+        $string = ''; // returns an empty string by default
         
-        $string = parent::get_string($identifier, $component, $a, 'en');
+        if(get_config('local_duallang', 'enabled')) {
+            
+            $order = get_config('local_duallang', 'readingorder');
+            
+            $primarylang = parent::get_string($identifier, $component, $a, get_config('local_duallang', 'primarylanguage'));
         
-        $zh_cn = parent::get_string($identifier, $component, $a, 'zh_cn');
-         
-        if(strlen($zh_cn) > 0) {
-            $string .= ' | ' . $zh_cn;
+            $secondarylang = parent::get_string($identifier, $component, $a, get_config('local_duallang', 'secondarylanguage'));
+            
+            // ordering is only left to right or right to left so just check the first letter of the string 
+            if($order[0] == 'L') {
+                $string = $primarylang . ' (' . $secondarylang . ')';
+            } else {
+                $string = '(' . $secondarylang . ') ' . $primarylang;
+            }
+        } else {
+            $string = parent::get_string($identifier, $component, $a, $lang);
         }
-        
         return $string;
     }
 }
