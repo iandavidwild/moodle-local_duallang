@@ -28,7 +28,7 @@ if ($hassiteconfig) {
     
     $settings->add(new admin_setting_heading('local_duallang/generalheading', get_string('generalheading', 'local_duallang'), ''));
     
-    $settings->add(new admin_setting_configcheckbox('local_duallang/enabled', get_string('enableduallangs', 'local_duallang')));
+    $settings->add(new admin_setting_configcheckbox('local_duallang/enabled', get_string('enableduallangs', 'local_duallang'), '', 0));
 
     // obtain list of available languages from the language manager
 
